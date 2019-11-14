@@ -1,0 +1,134 @@
+<html>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+  />
+  <body>
+    <br />
+    <main role="main" class="container">
+      <form method="">
+        <div class="row">
+          <div class="col-lg-1 "></div>
+
+          <div class="col-lg-6 ">
+            <h1>Asignacion de actividades</h1>
+          </div>
+        </div>
+        <div class="row"></div>
+        <br />
+        <div class="row">
+          <div class="col-lg-3 ">
+            <div class="form-group">
+              <label for="Identificacion">Identificación</label>
+
+              <input
+                type="number"
+                class="form-control form-control-lg "
+                placeholder="identificacion"
+                name="identificacion"
+                id="identificacion"
+                [(ngModel)]="docente.idDocente"
+              />
+            </div>
+            <div class="form-group ">
+              <label for="nombres">Nombres</label>
+              <input
+                type="text"
+                readonly="readonly"
+                class="form-control form-control-lg"
+                placeholder="Nombres"
+                name="nombres"
+                id="nombres"
+                [(ngModel)]="docente.nombres"
+              />
+            </div>
+            <div class="form-group">
+              <label for="sexo">Tipo de actividad</label>
+              <select
+                class="form-control"
+                id="sexo"
+                name="sexo"
+                [(ngModel)]="actividad.nombreActividad"
+              >
+                <option value="Tutorias">Tutorias</option>
+                <option value="Investigación">Investigación</option>
+                <option value="Extensión">Extensión</option>
+                <option value="Material de apoyo">Material de apoyo</option>
+                <option value="Trabajo de grado">Trabajo de grado</option>
+                <option value="Cooperación institucional">Cooperación Institucional</option>
+                <option value="Crecimiento personal">Crecimiento Personal</option>
+                <option value="Encargo administrativo">Encargo Administrativo</option>
+
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3" style=" padding-top: 25px;">
+            <div class="form-group">
+              <button (click)="getDocente()" class="btn btn-primary">
+                Buscar
+              </button>
+            </div>
+            <div class="form-group">
+              <label for="Apellidos">Apellidos</label>
+              <input
+                type="text"
+                readonly="readonly"
+                class="form-control form-control-lg"
+                placeholder="Apellidos"
+                name="Apellidos"
+                id="Apellidos"
+                [(ngModel)]="docente.apellidos"
+              />
+            </div>
+            <div class="form-group">
+              <label for="Horas">Horas</label>
+              <input
+                type="number"
+                class="form-control form-control-lg"
+                placeholder="Horas"
+                name="Horas"
+                id="Horas"
+                [(ngModel)]="actividad.horasAsignadas"
+              />
+            </div>
+            <div class="form-group" style="text-align: right">
+              <button (click)="addActividad()" class="btn btn-primary">
+                Agregar
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+              <table
+                class="table table-bordered table-striped mb-0"
+                id="myTable"
+              >
+                <thead>
+                  <tr>
+                    <th>Identificación Docente</th>
+                    <th>Tipo de actividad</th>
+                    <th>Horas Asignadas</th>
+                    <th>Estado</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let c of actividades">
+                    <td>{{ c.docente.idDocente }}</td>
+                    <td>{{ c.nombreActividad }}</td>
+                    <td>{{ c.horasAsignadas }}</td>
+                    <td>Asignada</td>
+                    <td><button (click)="Eliminar(c.idActividad)" class="btn" style="color: white;" >Eliminar</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

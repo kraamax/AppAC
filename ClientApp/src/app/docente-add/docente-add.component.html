@@ -1,0 +1,97 @@
+<html>
+
+<body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <br>
+  <main role="main" class="container">
+
+
+
+    <form method="">
+      <div class="row">
+
+        <div class="col-lg-1 ">
+
+        </div>
+
+        <div class="col-lg-6 ">
+          <h1>Registro Docente</h1>
+        </div>
+      </div>
+      <div class="row">
+
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-4">
+
+
+          <div class="form-group">
+            <label for="Identificacion">Identificación</label>
+
+            <input type="number" class="form-control form-control-lg " placeholder="identificacion" name="identificacion"
+                   id="identificacion" [(ngModel)]="docente.idDocente">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control form-control-lg" placeholder="TuEmail@email.com" name="email"
+                   [(ngModel)]="docente.email">
+          </div>
+
+
+        
+
+
+
+          <br>
+
+
+          <br>
+
+
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group ">
+            <label for="nombres">Nombres</label>
+            <input type="text" class="form-control form-control-lg" placeholder="Nombres" name="nombres" id="nombres"
+                   [(ngModel)]="docente.nombres">
+          </div>
+
+          <div class="form-group">
+            <label for="sexo">Seleccione su sexo</label>
+            <select class="form-control" id="sexo" name="sexo" [(ngModel)]="docente.sexo">
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
+          </div>
+
+    
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="Apellidos">Apellidos</label>
+            <input type="text" class="form-control form-control-lg" placeholder="Apellidos" name="Apellidos"
+                   id="Apellidos" [(ngModel)]="docente.apellidos">
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="email" class="form-control form-control-lg" placeholder="Telefono" name="telefono"
+                   id="telefono" [(ngModel)]="docente.telefono">
+          </div>
+          <br>
+          <div class="form-group" style="text-align: right">
+            <button (click)="add()" class="btn btn-primary">Agregar</button>
+          </div>
+
+
+        </div>
+
+      </div>
+    </form>
+  </main>
+
+
+</body>
+</html>

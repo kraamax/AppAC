@@ -1,0 +1,31 @@
+input{
+
+    font-size: 15px;
+    height: 30px;
+
+}
+label{
+
+    font-size: 15px;
+}
+select{
+    font-size: 15px;
+    height: 35px;
+    
+
+}
+option{
+
+    font-size: 15px;
+    height:30px;
+   
+}
+button{
+
+    background-color: green;
+}
+button:hover{
+
+background-color: seagreen;
+
+}

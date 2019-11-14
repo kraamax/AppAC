@@ -1,0 +1,35 @@
+
+   
+<div class="scrollable">
+<table class="table  " id="myTable"  >
+   <thead> 
+  
+  <tr>
+        <th>Identificación</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Tipo de actividad</th>
+        <th>Horas Asignadas</th>
+        <th>Ver</th>
+      </tr>
+ 
+    </thead>      
+    
+  <tbody>
+   
+    <tr *ngFor="let c of actividades">
+      <td>{{ c.docente.idDocente }}</td>
+      <td>{{ c.docente.nombres }}</td>
+      <td>{{ c.docente.apellidos }}</td>
+      <td>{{ c.nombreActividad }}</td>
+      <td>{{ c.horasAsignadas }}</td>
+      <td>Asignada</td>
+      <td>ver</td>
+    </tr>
+  </tbody>
+
+</table>
+
+</div>
+
+
