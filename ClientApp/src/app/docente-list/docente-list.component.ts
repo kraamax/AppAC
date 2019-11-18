@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DocenteService } from '../services/docente.service';
 import { Docente } from '../models/docente';
+import { JefeDepartamentoService } from '../services/jefe-departamento.service';
+import { JefeDepartamento } from '../models/jefe-departamento';
 
 @Component({
   selector: 'app-docente-list',
@@ -10,16 +12,21 @@ import { Docente } from '../models/docente';
 export class DocenteListComponent implements OnInit {
 
   docentes:Docente[];
-  constructor(private docenteService:DocenteService) { }
+  jefeDpto:JefeDepartamento;
+  constructor(private docenteService:DocenteService, private jefeDptoService:JefeDepartamentoService) { }
 
   ngOnInit() {
+    this.getJefeDpto();
     this.getDocentes();
 
   }
-
+getJefeDpto(){
+this.jefeDpto=this.jefeDptoService.getJefeLS();
+}
   getDocentes(){
+    console.log(this.jefeDpto.departamento.idDepartamento);
 
-this.docenteService.getAll().subscribe(docentes=>this.docentes=docentes);
+this.docenteService.getDocentesDepartamento(this.jefeDpto.departamento.idDepartamento).subscribe(docentes=>this.docentes=docentes);
 
   }
 }

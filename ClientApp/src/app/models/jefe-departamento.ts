@@ -9,5 +9,7 @@ export class JefeDepartamento {
     departamento:Departamento;
     telefono:string;
     sexo:string;
+    usuario:string;
+    password:string;
 
 }

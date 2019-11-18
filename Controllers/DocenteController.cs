@@ -63,6 +63,28 @@ public class DocenteController : ControllerBase
             }
                 return docente;
         }
+        [HttpGet("doc={idDocente}/Dpto={idDpto}")]
+          public async Task<ActionResult<Docente>> GetDocenteDpto(int idDocente,int idDpto)
+        {
+            //prueba linq
+            var docente = await _context.Docentes.Include(t =>t.Departamento).FirstOrDefaultAsync(i=>i.IdDocente==idDocente && i.DepartamentoId==idDpto);
+            if (docente == null)
+            {
+                return NotFound();
+            }
+                return docente;
+        }
+            [HttpGet("user={user}")]
+          public async Task<ActionResult<Docente>> GetUserDocente(string user)
+        {
+            //prueba linq
+            var docente = await _context.Docentes.Include(t =>t.Departamento).FirstOrDefaultAsync(i=>i.Usuario==user);
+            if (docente == null)
+            {
+                return NotFound();
+            }
+                return docente;
+        }
 
         // POST: api/Task
         [HttpPost]
@@ -71,15 +93,11 @@ public class DocenteController : ControllerBase
             
             item.Usuario = "" + item.IdDocente;
             item.Password = "" + item.IdDocente;
-               if(item.Departamento!=null){
+              
                 item.DepartamentoId=item.Departamento.IdDepartamento;
                 item.Departamento=null;
 
 
-            }else{
-
-                item.DepartamentoId=1;
-            }
             _context.Docentes.Add(item);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetDocenteItem), new { id = item.IdDocente }, item);

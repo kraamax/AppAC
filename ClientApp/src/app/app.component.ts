@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JefeDepartamentoService } from './services/jefe-departamento.service';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  /*isDocente:boolean;
+  constructor(private jefeDptoService:JefeDepartamentoService){
+isDocente:jefeDptoService.getJefeDptoLoggedIn();
+
+  }*/
 }

@@ -31,7 +31,9 @@ export class JefeAddComponent implements OnInit {
       departamento: this.departamento,
       sexo: "",
       email: "",
-      telefono: ""
+      telefono: "", 
+      usuario:"",
+      password:""
     };
     this.getDepartamentos();
     this.haveDepartamento = false;
@@ -58,7 +60,9 @@ export class JefeAddComponent implements OnInit {
             departamento: this.departamento,
             sexo: "",
             email: "",
-            telefono: ""
+            telefono: "",
+            usuario:"",
+            password:""
           };
 
         });

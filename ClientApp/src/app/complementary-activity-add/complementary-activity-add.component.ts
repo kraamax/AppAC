@@ -8,6 +8,8 @@ import { ActividadService } from "../services/actividad.service";
 import { get } from "selenium-webdriver/http";
 import { MensajeModalComponent } from "../mensaje-modal/mensaje-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { JefeDepartamentoService } from "../services/jefe-departamento.service";
+import { JefeDepartamento } from "../models/jefe-departamento";
 
 @Component({
   selector: "app-complementary-activity-add",
@@ -19,20 +21,26 @@ export class ComplementaryActivityAddComponent implements OnInit {
   actividades: Actividad[];
   docente: Docente;
   haveDocente: boolean;
+  jefeDpto:JefeDepartamento;
   constructor(
     private docenteService: DocenteService,
     private actividadService: ActividadService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private jefeDptoService:JefeDepartamentoService
   ) {}
 
   ngOnInit() {
+    this.getJefeDpto();
     this.docente = {
       nombres: "",
       apellidos: "",
       idDocente: null,
       sexo: "",
       email: "",
-      telefono: ""
+      telefono: "",
+      password:"",
+      usuario:"",
+      departamento:null
     };
     this.haveDocente = false;
     this.actividad = {
@@ -42,6 +50,10 @@ export class ComplementaryActivityAddComponent implements OnInit {
       horasAsignadas: null,
       fechaAsignacion: null
     };
+  }
+  getJefeDpto(){
+this.jefeDpto=this.jefeDptoService.getJefeLS();
+
   }
   addActividad() {
     if (this.actividad.horasAsignadas != null && this.actividad.nombreActivity != null) {
@@ -71,7 +83,7 @@ export class ComplementaryActivityAddComponent implements OnInit {
       var id = Number.parseInt(
         (document.getElementById("identificacion") as HTMLInputElement).value
       );
-      this.docenteService.get(id).subscribe(docente => {
+      this.docenteService.getDocenteDpto(id,this.jefeDpto.departamento.idDepartamento).subscribe(docente => {
         this.docente = docente;
         if (isUndefined(this.docente)) {
           this.docente = {
@@ -80,8 +92,12 @@ export class ComplementaryActivityAddComponent implements OnInit {
             idDocente: null,
             sexo: "",
             email: "",
-            telefono: ""
+            telefono: "",
+            password:"",
+            usuario:"",
+            departamento:null
           };
+          this.actividades=null;
           this.haveDocente = false;
         } else {
           this.getActividadesDocente(this.docente.idDocente);

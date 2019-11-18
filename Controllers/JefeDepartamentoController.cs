@@ -64,6 +64,17 @@ public class JefeDepartamentoController : ControllerBase
             }
                 return jefeDepartamento;
         }
+           [HttpGet("user={user}")]
+         public async Task<ActionResult<JefeDepartamento>> GetjefeDptoByUser(string user)
+        {
+            //prueba linq
+            var jefeDepartamento = await _context.JefeDepartamentos.Include(t =>t.Departamento).FirstOrDefaultAsync(i=>i.Usuario==user);
+            if (jefeDepartamento == null)
+            {
+                return NotFound();
+            }
+                return jefeDepartamento;
+        }
 
         // POST: api/Task
         [HttpPost]

@@ -19,6 +19,13 @@ import { DocenteEditComponent } from './docente-edit/docente-edit.component';
 import { JefeAddComponent } from './jefe-add/jefe-add.component';
 import { JefeListComponent } from './jefe-list/jefe-list.component';
 import { JefeEditComponent } from './jefe-edit/jefe-edit.component';
+import { LoginComponent } from './login/login.component';
+import { DocenteService } from './services/docente.service';
+import { AuthGuard } from './services/auth.guard';
+import { AuthJefeDptoGuard } from './services/auth-jefe-dpto.guard';
+import { JefeDepartamentoService } from './services/jefe-departamento.service';
+import { AuthLoginGuard } from './services/auth-login.guard';
+import { AdminGuard } from './services/admin.guard';
 
 @NgModule({
   declarations: [
@@ -35,7 +42,8 @@ import { JefeEditComponent } from './jefe-edit/jefe-edit.component';
     DocenteEditComponent,
     JefeAddComponent,
     JefeListComponent,
-    JefeEditComponent
+    JefeEditComponent,
+    LoginComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   ,
@@ -45,19 +53,21 @@ import { JefeEditComponent } from './jefe-edit/jefe-edit.component';
       FormsModule,
       NgbModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: LoginComponent,canActivate:[AuthLoginGuard] },
+      { path: 'home',component: HomeComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'docenteAdd', component: DocenteAddComponent },
-      { path: 'docenteList', component: DocenteListComponent },
-      { path: 'ActivityAdd', component: ComplementaryActivityAddComponent },
-      { path: 'docenteEdit/:id', component: DocenteEditComponent },
-      { path: 'jefeAdd', component: JefeAddComponent },
-      { path: 'jefeList', component: JefeListComponent },
-      { path: 'jefeEdit/:id', component: JefeEditComponent },
+      { path: 'docenteAdd', canActivate:[AuthJefeDptoGuard],component: DocenteAddComponent },
+      { path: 'docenteList', canActivate:[AuthJefeDptoGuard], component: DocenteListComponent },
+      { path: 'ActivityAdd',canActivate:[AuthJefeDptoGuard], component: ComplementaryActivityAddComponent },
+      { path: 'docenteEdit/:id',canActivate:[AuthJefeDptoGuard], component: DocenteEditComponent },
+      { path: 'jefeAdd',canActivate:[AdminGuard], component: JefeAddComponent },
+      { path: 'jefeList',canActivate:[AdminGuard], component: JefeListComponent },
+      { path: 'jefeEdit/:id',canActivate:[AdminGuard], component: JefeEditComponent },
+      //{ path: 'login', component: LoginComponent },
     ])
   ],
-    providers: [],
+    providers: [DocenteService,JefeDepartamentoService],
     entryComponents: [MensajeModalComponent],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,14 @@
 <header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3" 
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand"   [routerLink]="['/']"> <img src="../../assets/Images/LOGO_UPC.png" style="width: 50px; height: 40px; padding-right:10px;">Actividades Complementarias</a>
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img
+          src="../../assets/Images/LOGO_UPC.png"
+          style="width: 50px; height: 40px; padding-right:10px;"
+        />Actividades Complementarias</a
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -17,30 +23,71 @@
       <div
         class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
         [ngClass]="{ show: isExpanded }"
+        style="background-color: green;z-index: 10;"
+
       >
         <ul class="navbar-nav flex-grow">
+          <div *ngIf="isDocente===false && isJefeDpto===false && isAdmin===false">
           <li
             class="nav-item "
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link "  style="color: white;" [routerLink]="['/']">Inicio</a>
+            <a class="nav-link " style="color: white;" [routerLink]="['/']"
+              >Entrar</a
+            >
           </li>
+        </div>
+          <li
+            class="nav-item "
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link " style="color: white;" [routerLink]="['/home']"
+              >Inicio</a
+            >
+          </li>
+          <div *ngIf="isJefeDpto">
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link " style="color: white;" [routerLink]="['/docenteList']"
+            <a
+              class="nav-link "
+              style="color: white;"
+              [routerLink]="['/docenteList']"
               >Docentes</a
             >
           </li>
+        </div>
+          <div *ngIf="isJefeDpto">
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link"  style="color: white;" [routerLink]="['/ActivityAdd']"
-              >Actividades </a
-            >
+            <a
+              class="nav-link"
+              style="color: white;"
+              [routerLink]="['/ActivityAdd']"
+              >Actividades
+            </a>
           </li>
+        </div>
+        <div *ngIf="isAdmin">
           <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link"  style="color: white;" [routerLink]="['/jefeList']"
-                >Jefe Departamento </a
-              >
-            </li>
+            <a
+              class="nav-link"
+              style="color: white;"
+              [routerLink]="['/jefeList']"
+              >Jefe Departamento
+            </a>
+          </li>
+        </div>
+          <div *ngIf="isJefeDpto || isDocente || isAdmin">
+          <li class="nav-item" (click)="logout()" [routerLinkActive]="['link-active']">
+            <a
+              class="nav-link"
+              style="color: white;"
+              [routerLink]="['/']"
+             
+              >Cerrar Sesión
+            </a>
+          </li>
+          </div>
         </ul>
       </div>
     </div>
