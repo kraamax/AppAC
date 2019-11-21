@@ -3,9 +3,10 @@ import { Docente } from "./docente";
 export class Actividad {
     idActividad:number;
     docente:Docente;
-    nombreActivity:string;
+    nombreActividad:string;
     fechaAsignacion:Date;
     horasAsignadas:number;
+    estado:string;
 
 
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Threading.Tasks;
 using AppAC.Models;
 namespace AppAC.Controllers
@@ -34,7 +35,7 @@ namespace AppAC.Controllers
 
                 // Crea un nuevo item si la coleccion esta vacia,
                 // lo que significa que no puedes borrar todos los Items.
-                _context.Actividades.Add(new Actividad { NombreActividad = "Tutoria", Docente = docente, FechaAsignada = "28/02/2019", HorasAsignadas = 3 });
+                _context.Actividades.Add(new Actividad { NombreActividad = "Tutoria", Estado="Asignada", Docente = docente, FechaAsignacion =DateTime.Parse("28/02/2019"), HorasAsignadas = 3 });
                 _context.SaveChanges();
 
 
@@ -80,6 +81,7 @@ namespace AppAC.Controllers
                 item.Docente=null;
 
             }
+         
             _context.Actividades.Add(item);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetActividadItem), new { id = item.IdActividad }, item);

@@ -26,6 +26,9 @@ import { AuthJefeDptoGuard } from './services/auth-jefe-dpto.guard';
 import { JefeDepartamentoService } from './services/jefe-departamento.service';
 import { AuthLoginGuard } from './services/auth-login.guard';
 import { AdminGuard } from './services/admin.guard';
+import { PlanAccionesAddComponent } from './plan-acciones-add/plan-acciones-add.component';
+import { PlanAccionesListComponent } from './plan-acciones-list/plan-acciones-list.component';
+import { PlanSeeComponent } from './plan-see/plan-see.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { AdminGuard } from './services/admin.guard';
     JefeAddComponent,
     JefeListComponent,
     JefeEditComponent,
-    LoginComponent
+    LoginComponent,
+    PlanAccionesAddComponent,
+    PlanAccionesListComponent,
+    PlanSeeComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   ,
@@ -64,7 +70,9 @@ import { AdminGuard } from './services/admin.guard';
       { path: 'jefeAdd',canActivate:[AdminGuard], component: JefeAddComponent },
       { path: 'jefeList',canActivate:[AdminGuard], component: JefeListComponent },
       { path: 'jefeEdit/:id',canActivate:[AdminGuard], component: JefeEditComponent },
-      //{ path: 'login', component: LoginComponent },
+      { path: 'planAdd',canActivate:[AuthGuard], component: PlanAccionesAddComponent },
+      { path: 'planList',canActivate:[AuthGuard], component: PlanAccionesListComponent },
+      { path: 'planSee/:idActividad',canActivate:[AuthGuard], component: PlanSeeComponent },
     ])
   ],
     providers: [DocenteService,JefeDepartamentoService],

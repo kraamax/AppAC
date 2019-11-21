@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AppAC.Migrations
 {
@@ -78,7 +79,8 @@ namespace AppAC.Migrations
                     NombreActividad = table.Column<string>(nullable: true),
                     DocenteId = table.Column<int>(nullable: false),
                     HorasAsignadas = table.Column<int>(nullable: false),
-                    FechaAsignada = table.Column<string>(nullable: true)
+                    Estado = table.Column<string>(nullable: true),
+                    FechaAsignacion = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,6 +92,51 @@ namespace AppAC.Migrations
                         principalColumn: "IdDocente",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Planes",
+                columns: table => new
+                {
+                    IdPlanAcciones = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(nullable: false),
+                    ActividadId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Planes", x => x.IdPlanAcciones);
+                    table.ForeignKey(
+                        name: "FK_Planes_Actividades_ActividadId",
+                        column: x => x.ActividadId,
+                        principalTable: "Actividades",
+                        principalColumn: "IdActividad",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Acciones",
+                columns: table => new
+                {
+                    IdAccion = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descripcion = table.Column<string>(nullable: true),
+                    PlanAccionesIdPlanAcciones = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Acciones", x => x.IdAccion);
+                    table.ForeignKey(
+                        name: "FK_Acciones_Planes_PlanAccionesIdPlanAcciones",
+                        column: x => x.PlanAccionesIdPlanAcciones,
+                        principalTable: "Planes",
+                        principalColumn: "IdPlanAcciones",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Acciones_PlanAccionesIdPlanAcciones",
+                table: "Acciones",
+                column: "PlanAccionesIdPlanAcciones");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Actividades_DocenteId",
@@ -105,15 +152,26 @@ namespace AppAC.Migrations
                 name: "IX_JefeDepartamentos_DepartamentoId",
                 table: "JefeDepartamentos",
                 column: "DepartamentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Planes_ActividadId",
+                table: "Planes",
+                column: "ActividadId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Actividades");
+                name: "Acciones");
 
             migrationBuilder.DropTable(
                 name: "JefeDepartamentos");
+
+            migrationBuilder.DropTable(
+                name: "Planes");
+
+            migrationBuilder.DropTable(
+                name: "Actividades");
 
             migrationBuilder.DropTable(
                 name: "Docentes");

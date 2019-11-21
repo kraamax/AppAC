@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace AppAC.Models
 {
-    public class PlanTrabajo
+    public class PlanAcciones
     {
-        public string Compromiso { get; set; }
-        public Docente Resoponsable { get; set; }
-        public string Fecha { get; set; }
+        [Key]
+        public int IdPlanAcciones { get; set; }
+        public List<Accion> Acciones { get; set; }
+        public DateTime Fecha { get; set; }
+        public int ActividadId { get; set; }
         public Actividad Actividad { get; set; }
 
     }

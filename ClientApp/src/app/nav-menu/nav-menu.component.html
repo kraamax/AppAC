@@ -57,6 +57,16 @@
             >
           </li>
         </div>
+        <div *ngIf="isDocente">
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a
+              class="nav-link "
+              style="color: white;"
+              [routerLink]="['/planList']"
+              >Plan de Acciones</a
+            >
+          </li>
+        </div>
           <div *ngIf="isJefeDpto">
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a

@@ -1,6 +1,8 @@
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System;
 namespace AppAC.Models
+
 {
     public class Actividad
     {
@@ -10,7 +12,8 @@ namespace AppAC.Models
         public int DocenteId { get; set; }
         public Docente Docente { get; set; }
         public int HorasAsignadas { get; set; }
-        public string FechaAsignada{get; set;}
+        public string Estado { get; set; }
+        public DateTime FechaAsignacion{get; set;}
         
     }
 }

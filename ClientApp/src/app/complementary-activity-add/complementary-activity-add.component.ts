@@ -45,10 +45,11 @@ export class ComplementaryActivityAddComponent implements OnInit {
     this.haveDocente = false;
     this.actividad = {
       idActividad: 0,
-      nombreActivity: "",
+      nombreActividad: "",
       docente: this.docente,
       horasAsignadas: null,
-      fechaAsignacion: null
+      fechaAsignacion: null,
+      estado:""
     };
   }
   getJefeDpto(){
@@ -56,9 +57,13 @@ this.jefeDpto=this.jefeDptoService.getJefeLS();
 
   }
   addActividad() {
-    if (this.actividad.horasAsignadas != null && this.actividad.nombreActivity != null) {
+    if (this.actividad.horasAsignadas != null && this.actividad.nombreActividad != null) {
       if (this.haveDocente) {
         this.actividad.docente = this.docente;
+        var fecha=(new Date().getMonth() +1) + "/" + new Date().getDate() + "/" + new Date().getFullYear();
+        this.actividad.fechaAsignacion=new Date(fecha);
+        this.actividad.estado="Asignada";
+        console.log(this.actividad);
         this.actividadService.addActividad(this.actividad).subscribe(rest => {
           this.getActividadesDocente(this.docente.idDocente);});
       } else {

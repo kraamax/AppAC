@@ -50,7 +50,7 @@ getActividadesDocente(idDocente:number): Observable<Actividad[]> {
 update (actividad: Actividad): Observable<any> {
   const url = `${this.baseUrl + 'api/actividad'}/${actividad.idActividad}`;
   return this.http.put(url, actividad, httpOptions).pipe(
-  tap(_ => this.log(`Actividad actualizada id=${actividad.idActividad}`)),
+  tap(_ => console.log(`Actividad actualizada id=${actividad.idActividad}`)),
   catchError(this.handleError<any>('ActividadUpdate'))
   );
   }
