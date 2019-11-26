@@ -26,15 +26,18 @@ namespace AppAC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Descripcion")
+                    b.Property<string>("AccionPlaneada")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlanAccionesIdPlanAcciones")
+                    b.Property<string>("AccionRealizada")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlanAccionesId")
                         .HasColumnType("int");
 
                     b.HasKey("IdAccion");
 
-                    b.HasIndex("PlanAccionesIdPlanAcciones");
+                    b.HasIndex("PlanAccionesId");
 
                     b.ToTable("Acciones");
                 });
@@ -179,7 +182,9 @@ namespace AppAC.Migrations
                 {
                     b.HasOne("AppAC.Models.PlanAcciones", null)
                         .WithMany("Acciones")
-                        .HasForeignKey("PlanAccionesIdPlanAcciones");
+                        .HasForeignKey("PlanAccionesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AppAC.Models.Actividad", b =>

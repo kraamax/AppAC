@@ -54,16 +54,19 @@
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
       <table class="table table-bordered table-striped mb-0">
         <tr>
-          <th class="masAncho">Acciones</th>
+          <th class="masAncho">Acciones Planeadas</th>
+          <th class="masAncho">Acciones Realizadas</th>
+          <th></th>
         </tr>
         <tr *ngFor="let action of plan.acciones">
-          <td class="masAncho">{{ action.accionPlaneada }}</td>
+          <td class="masAncho">{{ action.accionPlaneada }}</td>          
+          <td style="vertical-align: middle;" class="masAncho" *ngIf="action.accionRealizada===''"><button class="btn btn-primary" (click)="addAccionRealizada(action.idAccion)">Registrar</button></td>
+          <td class="masAncho" *ngIf="!(action.accionRealizada==='')">{{action.accionRealizada}}</td>
+          <td style="vertical-align: middle;" *ngIf="!(action.accionRealizada==='')"><button class="btn btn-primary" (click)="addAccionRealizada(action.idAccion)">Editar</button></td>
+
+
+
         </tr>
       </table>
     </div>
-    <div class="form-group" >
-        <button class="btn btn-primary" (click)="deletePlan()">Eliminar</button>
-    </div>
-
-
 </div>

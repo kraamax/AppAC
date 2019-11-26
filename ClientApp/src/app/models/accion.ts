@@ -1,4 +1,5 @@
 export class Accion {
     idAccion:number;
-    descripcion:string;
+    accionPlaneada:string;
+    accionRealizada:string;
 }

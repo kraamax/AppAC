@@ -9,13 +9,12 @@
             <th></th>
 
         </tr>
-        <tr *ngFor="let ac of actividades">
-            <td>{{ac.nombreActividad}}</td>
-            <td>{{ac.horasAsignadas}}</td>
-            <td>{{ac.fechaAsignacion}}</td>
-            <td>{{ac.estado}}</td>
-            <td *ngIf="ac.estado==='Asignada'"><a routerLink="/planAdd">Registrar Plan</a></td>
-            <td *ngIf="ac.estado==='Planeada'"><a routerLink="/planSee/{{ac.idActividad}}">Ver</a></td>
+        <tr *ngFor="let p of planes">
+            <td>{{p.actividad.nombreActividad}}</td>
+            <td>{{p.actividad.horasAsignadas}}</td>
+            <td>{{p.actividad.fechaAsignacion}}</td>
+            <td>{{p.actividad.estado}}</td>
+            <td *ngIf="p.actividad.estado==='Planeada'"><a routerLink="/accionesList/{{p.idPlanAcciones}}">Registrar descripciones</a></td>
         </tr>
     </table>
 </div>

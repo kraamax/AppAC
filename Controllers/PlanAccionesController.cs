@@ -29,6 +29,17 @@ namespace AppAC.Controllers
             return await _context.Planes
             .Include(t => t.Acciones)
             .Include(t => t.Actividad)
+            .ThenInclude(t=>t.Docente)
+            .ToListAsync();
+        }
+         [HttpGet("docente={idDocente}")]
+        public async Task<ActionResult<IEnumerable<PlanAcciones>>> GetPlanes(int idDocente)
+        {
+            return await _context.Planes
+            .Include(t => t.Acciones)
+            .Include(t => t.Actividad)
+            .ThenInclude(t => t.Docente)
+            .Where(t=>t.Actividad.Docente.IdDocente==idDocente)
             .ToListAsync();
         }
 
@@ -40,6 +51,7 @@ namespace AppAC.Controllers
             var planAcciones = await _context.Planes
             .Include(t => t.Acciones)
             .Include(t => t.Actividad)
+            .ThenInclude(t=>t.Docente)
             .FirstOrDefaultAsync(i => i.IdPlanAcciones == id);
             if (planAcciones == null)
             {
@@ -54,6 +66,7 @@ namespace AppAC.Controllers
             var planAcciones = await _context.Planes
             .Include(t => t.Acciones)
             .Include(t => t.Actividad)
+            .ThenInclude(t=>t.Docente)
             .FirstOrDefaultAsync(i => i.ActividadId == idActividad);
             if (planAcciones == null)
             {

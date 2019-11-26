@@ -119,24 +119,25 @@ namespace AppAC.Migrations
                 {
                     IdAccion = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descripcion = table.Column<string>(nullable: true),
-                    PlanAccionesIdPlanAcciones = table.Column<int>(nullable: true)
+                    AccionPlaneada = table.Column<string>(nullable: true),
+                    PlanAccionesId = table.Column<int>(nullable: false),
+                    AccionRealizada = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Acciones", x => x.IdAccion);
                     table.ForeignKey(
-                        name: "FK_Acciones_Planes_PlanAccionesIdPlanAcciones",
-                        column: x => x.PlanAccionesIdPlanAcciones,
+                        name: "FK_Acciones_Planes_PlanAccionesId",
+                        column: x => x.PlanAccionesId,
                         principalTable: "Planes",
                         principalColumn: "IdPlanAcciones",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Acciones_PlanAccionesIdPlanAcciones",
+                name: "IX_Acciones_PlanAccionesId",
                 table: "Acciones",
-                column: "PlanAccionesIdPlanAcciones");
+                column: "PlanAccionesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Actividades_DocenteId",

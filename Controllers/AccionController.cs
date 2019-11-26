@@ -24,60 +24,40 @@ namespace AppAC.Controllers
 
         // Aqu�, despues del constructor de la clase, ir�n los M�todos HTTP GET,POST, DELETE, PUT
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlanAcciones>>> GetPlanes()
+        public async Task<ActionResult<IEnumerable<Accion>>> GetAcciones()
         {
-            return await _context.Planes
-            .Include(t => t.Acciones)
-            .Include(t => t.Actividad)
-            .ToListAsync();
+            return await _context.Acciones.ToListAsync();
         }
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PlanAcciones>> GetPlan(int id)
+        public async Task<ActionResult<Accion>> GetAccion(int id)
         {
             //prueba linq
-            var planAcciones = await _context.Planes
-            .Include(t => t.Acciones)
-            .Include(t => t.Actividad)
-            .FirstOrDefaultAsync(i => i.IdPlanAcciones == id);
-            if (planAcciones == null)
+            var accion =  await _context.Acciones.FindAsync(id);
+            if (accion == null)
             {
                 return NotFound();
             }
-            return planAcciones;
+            return accion;
         }
-         [HttpGet("actividad={idActividad}")]
-        public async Task<ActionResult<PlanAcciones>> GetPlanByActividad(int idActividad)
-        {
-            //prueba linq
-            var planAcciones = await _context.Planes
-            .Include(t => t.Acciones)
-            .Include(t => t.Actividad)
-            .FirstOrDefaultAsync(i => i.ActividadId == idActividad);
-            if (planAcciones == null)
-            {
-                return NotFound();
-            }
-            return planAcciones;
-        }
+   
         // POST: api/Task
         [HttpPost]
-        public async Task<ActionResult<PlanAcciones>> PostPlan(PlanAcciones item)
+        public async Task<ActionResult<Accion>> PostAccion(Accion accion)
         {
-        item.ActividadId=item.Actividad.IdActividad;
-        item.Actividad=null;
-           
-            _context.Planes.Add(item);
+
+            
+            _context.Acciones.Add(accion);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPlan), new { id = item.IdPlanAcciones }, item);
+            return CreatedAtAction(nameof(GetAccion), new { id = accion.IdAccion }, accion);
 
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlan(int id, PlanAcciones item)
+        public async Task<IActionResult> PutPlan(int id, Accion item)
         {
-            if (id != item.IdPlanAcciones)
+            if (id != item.IdAccion)
             {
                 return BadRequest();
             }
@@ -85,17 +65,17 @@ namespace AppAC.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
-
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlan(int id)
         {
-            var planAcciones = await _context.Planes.FindAsync(id);
-            if (planAcciones == null)
+            var accion = await _context.Acciones.FindAsync(id);
+            if (accion == null)
             {
                 return NotFound();
             }
 
-            _context.Planes.Remove(planAcciones);
+            _context.Acciones.Remove(accion);
             await _context.SaveChangesAsync();
             return NoContent();
         }

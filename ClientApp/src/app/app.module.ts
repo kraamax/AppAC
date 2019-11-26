@@ -29,6 +29,10 @@ import { AdminGuard } from './services/admin.guard';
 import { PlanAccionesAddComponent } from './plan-acciones-add/plan-acciones-add.component';
 import { PlanAccionesListComponent } from './plan-acciones-list/plan-acciones-list.component';
 import { PlanSeeComponent } from './plan-see/plan-see.component';
+import { AccionesRealizadasListComponent } from './acciones-realizadas-list/acciones-realizadas-list.component';
+import { AccionRealizadaAddComponent } from './accion-realizada-add/accion-realizada-add.component';
+import { AccionesToPlanListComponent } from './acciones-to-plan-list/acciones-to-plan-list.component';
+import { AccionesPListComponent } from './acciones-plist/acciones-plist.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import { PlanSeeComponent } from './plan-see/plan-see.component';
     LoginComponent,
     PlanAccionesAddComponent,
     PlanAccionesListComponent,
-    PlanSeeComponent
+    PlanSeeComponent,
+    AccionesRealizadasListComponent,
+    AccionRealizadaAddComponent,
+    AccionesToPlanListComponent,
+    AccionesPListComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   ,
@@ -71,12 +79,14 @@ import { PlanSeeComponent } from './plan-see/plan-see.component';
       { path: 'jefeList',canActivate:[AdminGuard], component: JefeListComponent },
       { path: 'jefeEdit/:id',canActivate:[AdminGuard], component: JefeEditComponent },
       { path: 'planAdd',canActivate:[AuthGuard], component: PlanAccionesAddComponent },
-      { path: 'planList',canActivate:[AuthGuard], component: PlanAccionesListComponent },
+      { path: 'actForPlanList',canActivate:[AuthGuard], component: AccionesToPlanListComponent },
       { path: 'planSee/:idActividad',canActivate:[AuthGuard], component: PlanSeeComponent },
+      { path: 'planList',canActivate:[AuthGuard], component: PlanAccionesListComponent },
+      { path: 'accionesList/:idPlan',canActivate:[AuthGuard], component: AccionesPListComponent },
     ])
   ],
     providers: [DocenteService,JefeDepartamentoService],
-    entryComponents: [MensajeModalComponent],
+    entryComponents: [MensajeModalComponent,AccionRealizadaAddComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

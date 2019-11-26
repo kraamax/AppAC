@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 import { Accion } from '../models/accion';
 import { ActividadService } from '../services/actividad.service';
 import { Actividad } from '../models/actividad';
+import { DocenteService } from '../services/docente.service';
+import { Docente } from '../models/docente';
 
 @Component({
   selector: 'app-plan-see',
@@ -15,12 +17,14 @@ import { Actividad } from '../models/actividad';
 export class PlanSeeComponent implements OnInit {
   plan:PlanAcciones;
 actividad:Actividad;
+docente:Docente;
 
   constructor(
     private planService:PlanAccionesService,
     private route: ActivatedRoute,
     private location:Location,
-    private actividadService:ActividadService
+    private actividadService:ActividadService,
+    private docenteService:DocenteService
     
     ) { }
 
@@ -33,6 +37,10 @@ actividad:Actividad;
     const id = +this.route.snapshot.paramMap.get("idActividad");
     this.planService.getPlanByActividad(id).subscribe(plan => {
       (this.plan = plan);
+      this.docente=this.docenteService.getDocenteLS();
+      if(this.docente.idDocente!=this.plan.actividad.docente.idDocente){
+        this.goBack();
+      }
  
     });
   }

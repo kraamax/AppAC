@@ -10,7 +10,6 @@ import { Accion } from "../models/accion";
 import { PlanAcciones } from "../models/plan-acciones";
 import { Location } from "@angular/common";
 
-
 @Component({
   selector: "app-plan-acciones-add",
   templateUrl: "./plan-acciones-add.component.html",
@@ -29,11 +28,11 @@ export class PlanAccionesAddComponent implements OnInit {
     private docenteService: DocenteService,
     private accionService: AccionService,
     private planService: PlanAccionesService,
-    private location:Location
+    private location: Location
   ) {}
 
   ngOnInit() {
-    this.accion = { idAccion: null, descripcion: "" };
+    this.accion = { idAccion: null, accionPlaneada: "",accionRealizada:"" };
     this.getDocente();
     this.getActividades();
   }
@@ -85,10 +84,11 @@ export class PlanAccionesAddComponent implements OnInit {
         this.plan = plan;
         console.log(this.plan);
         if (isUndefined(this.plan)) {
-          if (this.accion.descripcion.trim() != "") {
+          if (this.accion.accionPlaneada.trim() != "") {
             this.accion.idAccion = 0;
+            this.accion.accionRealizada="";
             this.accionService.addAccion(this.accion);
-            this.accion.descripcion="";
+            this.accion.accionPlaneada = "";
             this.acciones = this.accionService.getAcciones();
           } else {
             alert("Digite una descripcion");
@@ -113,7 +113,6 @@ export class PlanAccionesAddComponent implements OnInit {
         console.log(this.plan);
         if (isUndefined(this.plan)) {
           this.addPlan();
-         
         } else {
           alert("Ya existe un plan de acciones para esta actividad");
         }

@@ -9,10 +9,12 @@ namespace AppAC.Models
 {
     public class Accion
     {
+        
         [Key]
         public int IdAccion { get; set; }
-      
-        public string Descripcion { get; set; }
+        public string AccionPlaneada { get; set; }
+        public int PlanAccionesId { get; set; }
+        public string AccionRealizada{ get; set; }
 
     }
 }

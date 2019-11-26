@@ -38,7 +38,14 @@ export class PlanAccionesService {
       tap(_ => console.log("Se Consulta la información")),
       catchError(this.handleError<PlanAcciones[]>("getAll", []))
     );
-  }
+    }
+    getPlanesByDocente(idDocente: number): Observable<PlanAcciones[]> {
+        const url = `${this.baseUrl + "api/planAcciones"}/docente=${idDocente}`;
+        return this.http.get<PlanAcciones[]>(url).pipe(
+            tap(_ => console.log("Se Consulta la información")),
+            catchError(this.handleError<PlanAcciones[]>("getAll", []))
+        );
+    }
   getPlanByActividad(idActividad: number): Observable<PlanAcciones> {
     const url = `${this.baseUrl + "api/planAcciones"}/actividad=${idActividad}`;
     return this.http.get<PlanAcciones>(url).pipe(
