@@ -1,8 +1,8 @@
 <div class="container">
-    <h2>Plan de Acciones</h2>
-    <br />
-   <div class="row">
-     <div class="col-lg-2">
+  <h2>Plan de Acciones</h2>
+  <br />
+  <div class="row">
+    <div class="col-lg-2">
       <div class="form-group">
         <label>Actividad: </label>
         <input
@@ -13,8 +13,8 @@
           readonly
         />
       </div>
-     </div>
-     <div class="col-lg-2">
+    </div>
+    <div class="col-lg-2">
       <div class="form-group">
         <label>Horas Asignadas: </label>
         <input
@@ -25,8 +25,8 @@
           readonly
         />
       </div>
-     </div>
-     <div class="col-lg-2">
+    </div>
+    <div class="col-lg-2">
       <div class="form-group">
         <label>Fecha: </label>
         <input
@@ -37,36 +37,59 @@
           readonly
         />
       </div>
-     </div>
-     <div class="col-lg-2">
+    </div>
+    <div class="col-lg-2">
       <div class="form-group">
         <label>Estado: </label>
         <input
+          type="text"
           [(ngModel)]="plan.actividad.estado"
           class="form-control"
           placeholder="Nombres"
-          type="text"
           readonly
         />
       </div>
-     </div>
-   </div>
-    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-      <table class="table table-bordered table-striped mb-0">
-        <tr>
-          <th class="masAncho">Acciones Planeadas</th>
-          <th class="masAncho">Acciones Realizadas</th>
-          <th></th>
-        </tr>
-        <tr *ngFor="let action of plan.acciones">
-          <td class="masAncho">{{ action.accionPlaneada }}</td>          
-          <td style="vertical-align: middle;" class="masAncho" *ngIf="action.accionRealizada===''"><button class="btn btn-primary" (click)="addAccionRealizada(action.idAccion)">Registrar</button></td>
-          <td class="masAncho" *ngIf="!(action.accionRealizada==='')">{{action.accionRealizada}}</td>
-          <td style="vertical-align: middle;" *ngIf="!(action.accionRealizada==='')"><button class="btn btn-primary" (click)="addAccionRealizada(action.idAccion)">Editar</button></td>
-
-
-
-        </tr>
-      </table>
     </div>
-</div>
+  </div>
+  <div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered table-striped mb-0">
+      <tr>
+        <th class="masAncho">Acciones Planeadas</th>
+        <th class="masAncho">Acciones Realizadas</th>
+        <th>Evidencia</th>
+        <th></th>
+       
+      </tr>
+      <tr *ngFor="let action of plan.acciones">
+        <td class="masAncho">{{ action.accionPlaneada }}</td>
+        <td
+          style="vertical-align: middle;"
+          class="masAncho"
+          *ngIf="action.accionRealizada === ''"
+        >
+          <button
+            class="btn btn-primary"
+            (click)="addAccionRealizada(action.idAccion)"
+          >
+            Registrar
+          </button>
+        </td>
+        <td class="masAncho" *ngIf="!(action.accionRealizada === '')">
+          {{ action.accionRealizada }}
+        </td>
+        <td *ngIf="!(action.evidencia === '')"><button class="btn btn-primary"  (click)="createImgPath(action.evidencia)">ver</button></td>
+
+        <td
+          style="vertical-align: middle;"
+          *ngIf="!(action.accionRealizada === '')"
+        >
+          <button
+            class="btn btn-primary"
+            (click)="addAccionRealizada(action.idAccion)"
+          >
+            Editar
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>

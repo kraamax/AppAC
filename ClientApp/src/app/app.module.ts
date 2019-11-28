@@ -33,6 +33,8 @@ import { AccionesRealizadasListComponent } from './acciones-realizadas-list/acci
 import { AccionRealizadaAddComponent } from './accion-realizada-add/accion-realizada-add.component';
 import { AccionesToPlanListComponent } from './acciones-to-plan-list/acciones-to-plan-list.component';
 import { AccionesPListComponent } from './acciones-plist/acciones-plist.component';
+import { UploadComponent } from './upload/upload.component';
+import { PasswordChangeModalComponent } from './password-change-modal/password-change-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { AccionesPListComponent } from './acciones-plist/acciones-plist.componen
     AccionesRealizadasListComponent,
     AccionRealizadaAddComponent,
     AccionesToPlanListComponent,
-    AccionesPListComponent
+    AccionesPListComponent,
+    UploadComponent,
+    PasswordChangeModalComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   ,
@@ -86,7 +90,7 @@ import { AccionesPListComponent } from './acciones-plist/acciones-plist.componen
     ])
   ],
     providers: [DocenteService,JefeDepartamentoService],
-    entryComponents: [MensajeModalComponent,AccionRealizadaAddComponent],
+    entryComponents: [MensajeModalComponent,AccionRealizadaAddComponent,PasswordChangeModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

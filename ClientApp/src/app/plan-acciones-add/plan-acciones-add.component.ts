@@ -32,7 +32,7 @@ export class PlanAccionesAddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.accion = { idAccion: null, accionPlaneada: "",accionRealizada:"" };
+    this.accion = { idAccion: null, accionPlaneada: "",accionRealizada:"",evidencia:"" };
     this.getDocente();
     this.getActividades();
   }
@@ -87,6 +87,7 @@ export class PlanAccionesAddComponent implements OnInit {
           if (this.accion.accionPlaneada.trim() != "") {
             this.accion.idAccion = 0;
             this.accion.accionRealizada="";
+            this.accion.evidencia="";
             this.accionService.addAccion(this.accion);
             this.accion.accionPlaneada = "";
             this.acciones = this.accionService.getAcciones();
@@ -107,10 +108,11 @@ export class PlanAccionesAddComponent implements OnInit {
       var id = Number.parseInt(
         (document.getElementById("actividades") as HTMLInputElement).value
       );
-
+//obtengo el plan
       this.planService.getPlanByActividad(id).subscribe(plan => {
         this.plan = plan;
         console.log(this.plan);
+        //si es indefinido agrego
         if (isUndefined(this.plan)) {
           this.addPlan();
         } else {

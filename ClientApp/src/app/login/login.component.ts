@@ -7,6 +7,8 @@ import { isUndefined } from "util";
 import { JefeDepartamento } from "../models/jefe-departamento";
 import { JefeDepartamentoService } from "../services/jefe-departamento.service";
 import { AdminService } from "../services/admin.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { PasswordChangeModalComponent } from "../password-change-modal/password-change-modal.component";
 
 @Component({
   selector: "app-login",
@@ -21,7 +23,8 @@ export class LoginComponent implements OnInit {
     private docenteService: DocenteService,
     private router: Router,
     private jefeDptoService: JefeDepartamentoService,
-    private adminService:AdminService
+    private adminService:AdminService,
+    private modalService:NgbModal
   ) {}
 
   ngOnInit() {}
@@ -66,7 +69,10 @@ export class LoginComponent implements OnInit {
     var pass = (document.getElementById("password") as HTMLInputElement).value;
     if (user == usuario && pass == password) {
       this.jefeDptoService.setJefeDptoLoggedIn();
-      this.router.navigate(["ActivityAdd"]);
+      this.router.navigate(["home"]);
+      if(usuario==password){
+        this.modalService.open(PasswordChangeModalComponent,{backdrop: 'static', keyboard: false});
+      }
     } else {
       alert("Contraseña incorrecta");
     }
@@ -78,12 +84,14 @@ export class LoginComponent implements OnInit {
       console.log("acceso aceptado");
       this.docenteService.setDocenteLoggedIn();
       this.router.navigate(["home"]);
+      if(usuario==password){
+        this.modalService.open(PasswordChangeModalComponent,{backdrop: 'static', keyboard: false});
+      }
     } else {
       alert("Contraseña incorrecta");
     }
   }
   validarLoginAdmin(){
-
     var user = (document.getElementById("user") as HTMLInputElement).value;
     var pass = (document.getElementById("password") as HTMLInputElement).value;
     if(user=="Admin" && pass=="123"){

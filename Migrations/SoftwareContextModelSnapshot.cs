@@ -32,6 +32,9 @@ namespace AppAC.Migrations
                     b.Property<string>("AccionRealizada")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Evidencia")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PlanAccionesId")
                         .HasColumnType("int");
 

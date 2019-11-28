@@ -15,6 +15,7 @@ namespace AppAC.Models
         public string AccionPlaneada { get; set; }
         public int PlanAccionesId { get; set; }
         public string AccionRealizada{ get; set; }
+        public string Evidencia { get; set; }
 
     }
 }

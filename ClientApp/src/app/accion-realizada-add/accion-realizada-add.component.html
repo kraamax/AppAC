@@ -20,6 +20,7 @@
                   [(ngModel)]="accion.accionRealizada"
               ></textarea>
             </div>
+          <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
             <div class="form-group" style="text-align: right;">
               <button class="btn btn-primary" (click)="addAccionRealizada()">Guardar</button>
             </div>

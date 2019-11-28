@@ -9,8 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using NJsonSchema;
 using NSwag.AspNetCore;
 using NSwag;
-
+using System.IO;
 using AppAC.Models;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
 namespace AppAC
 {
@@ -29,6 +32,12 @@ namespace AppAC
             services.AddDbContext<SoftwareContext>(opt => opt.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=SoftwareAC;Trusted_Connection=True;"));
             services.AddSwaggerDocument();
             services.AddControllersWithViews();
+
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -52,6 +61,11 @@ namespace AppAC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
             app.UseSwagger();
             app.UseSwaggerUi3();
             if (!env.IsDevelopment())

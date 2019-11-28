@@ -1,0 +1,22 @@
+clear;
+clc;
+syms x
+cf=input('ingrese la funcion a evaluar: ');
+
+f=inline(cf);
+derivada=diff(cf,x);
+df=inline(derivada);
+tol=input('ingrese la tolerancia: ');
+error=50;
+x=input('ingrese un valor inicial: ');
+n=0;
+disp('       n           xi             error  xn');
+while(error>tol)
+   
+    n=n+1; 
+    x=x-f(x)/df(x);
+     fprintf('        \t%i     \t%3.5f     \t%f      \t%3.5f   \n',n,x,error,xn );
+       x=xn;
+    error=abs( f(x) );
+  
+end
