@@ -3,12 +3,10 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
   color: white;
-
 }
 
 .nav-item:hover{
   background-color: seagreen;
-  
    }
 
 nav{
@@ -19,6 +17,9 @@ height: 75px;
 html {
   font-size: 14px;
 }
+a.nav-link{
+  font-size: 16px;
+}
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -28,3 +29,16 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.footer {
+  position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: green;
+   color: white;
+   text-align: center;
+z-index: -1;
+ }
+ 
+ 

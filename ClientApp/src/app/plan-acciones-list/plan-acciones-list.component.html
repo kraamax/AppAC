@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Consulta Plan de Acciones</h2>
+    <h2>Consulta Plan de Acción</h2>
     <table class="table">
         <tr>
             <th>Actividad</th>
@@ -14,7 +14,8 @@
             <td>{{p.actividad.horasAsignadas}}</td>
             <td>{{p.actividad.fechaAsignacion}}</td>
             <td>{{p.actividad.estado}}</td>
-            <td *ngIf="p.actividad.estado==='Planeada'"><a routerLink="/accionesList/{{p.idPlanAcciones}}">Registrar descripciones</a></td>
+            <td *ngIf="!(p.actividad.estado==='Asignada') && !(p.actividad.estado==='Terminada') && !(p.actividad.estado==='No Terminada') "><a routerLink="/accionesList/{{p.idPlanAcciones}}">Registrar descripciones</a></td>
+            <td *ngIf="(p.actividad.estado==='Terminada') || (p.actividad.estado==='No Terminada') "><a routerLink="/accionesList/{{p.idPlanAcciones}}">Ver</a></td>
         </tr>
     </table>
 </div>

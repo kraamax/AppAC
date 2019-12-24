@@ -1,0 +1,108 @@
+<div class="container">
+    <h2>Plan de Acciones</h2>
+    <br />
+    <div class="row">
+        <div class="col-lg-3">
+            <p><b>Identificacion: </b>{{plan.actividad.docente.idDocente}}</p>
+        
+          </div>
+          <div class="col-lg-4">
+              <p><b>Nombre: </b>{{plan.actividad.docente.nombres}}</p>
+          
+            </div>
+      <div class="col-lg-4">
+          
+              <p><b>Apellidos: </b>{{plan.actividad.docente.apellidos}}</p>
+          
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="form-group">
+              <label>Actividad: </label>
+              <input
+                [(ngModel)]="plan.actividad.nombreActividad"
+                class="form-control"
+                placeholder="Nombres"
+                type="text"
+                readonly
+              />
+            </div>
+          </div>
+
+      <div class="col-lg-2">
+        <div class="form-group">
+          <label>Horas Asignadas: </label>
+          <input
+            [(ngModel)]="plan.actividad.horasAsignadas"
+            class="form-control"
+            placeholder="Nombres"
+            type="text"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="form-group">
+          <label>Fecha: </label>
+          <input
+            [(ngModel)]="plan.actividad.fechaAsignacion"
+            class="form-control"
+            placeholder="Nombres"
+            type="text"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="form-group">
+          <label>Estado: </label>
+          <input
+            type="text"
+            [(ngModel)]="plan.actividad.estado"
+            class="form-control"
+            placeholder="Nombres"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="form-group">
+          <label>Progreso: </label>
+          <input
+            type="text"
+            [(ngModel)]="progreso"
+            class="form-control"
+            placeholder="Progreso"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+
+       
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <table class="table table-bordered table-striped mb-0">
+        <tr>
+          <th class="masAncho">Acciones Planeadas</th>
+          <th class="masAncho">Acciones Realizadas</th>
+          <th class="normal">Evidencia</th>
+        
+         
+        </tr>
+        <tr *ngFor="let action of plan.acciones">
+          <td class="masAncho">{{ action.accionPlaneada }}</td>
+        
+          <td class="masAncho" *ngIf="!(action.accionRealizada === '')">
+            {{ action.accionRealizada }}
+          </td>
+          <td *ngIf="!(action.evidencia === '')" style="vertical-align: middle;" class="normal"><button class="btn btn-primary"  (click)="createImgPath(action.evidencia)">ver</button></td>
+
+        </tr>
+      </table>
+    </div>
+</div>
+</div>
+  

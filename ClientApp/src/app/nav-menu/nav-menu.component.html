@@ -63,8 +63,17 @@
               class="nav-link "
               style="color: white;"
               [routerLink]="['/actForPlanList']"
-              >Plan de Acciones</a
+              >Plan de acción</a
             >
+          </li>
+        </div>
+        <div *ngIf="isDocente">
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a
+              class="nav-link "
+              style="color: white;"
+              [routerLink]="['/planList']"
+              >Descripción de acciones</a>
           </li>
         </div>
           <div *ngIf="isJefeDpto">
@@ -72,7 +81,7 @@
             <a
               class="nav-link"
               style="color: white;"
-              [routerLink]="['/ActivityAdd']"
+              [routerLink]="['/ActividadList']"
               >Actividades
             </a>
           </li>
@@ -87,6 +96,16 @@
             </a>
           </li>
         </div>
+        <div *ngIf="isAdmin">
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a
+                class="nav-link"
+                style="color: white;"
+                [routerLink]="['/plazoActivacion']"
+                >Gestión de plataforma
+              </a>
+            </li>
+          </div>
           <div *ngIf="isJefeDpto || isDocente || isAdmin">
           <li class="nav-item" (click)="logout()" [routerLinkActive]="['link-active']">
             <a
@@ -103,3 +122,10 @@
     </div>
   </nav>
 </header>
+
+<div class="footer">
+  <p>© 2017 - Universidad Popular del Cesar
+    Sede Sabanas Diagonal 21 No. 29-56 Sabanas del Valle –Valledupar- Cesar -Colombia.       
+    Institución sujeta a inspección y vigilancia por el Ministerio de Educación Nacional</p>
+</div>
+

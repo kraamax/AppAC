@@ -67,6 +67,11 @@ namespace AppAC.Controllers
         {
            return await _context.Actividades.Include(t => t.Docente).ThenInclude(t=>t.Departamento).Where(i=>i.DocenteId==idDocente).ToListAsync();
         }
+         [HttpGet("departamento={idDepartamento}")]
+        public async Task<ActionResult<IEnumerable<Actividad>>> GetActividadesByDepartamento(int idDepartamento)
+        {
+           return await _context.Actividades.Include(t => t.Docente).ThenInclude(t=>t.Departamento).Where(i=>i.Docente.DepartamentoId==idDepartamento).ToListAsync();
+        }
            [HttpGet("Dpto={idDpto}")]
         public async Task<ActionResult<IEnumerable<Actividad>>> GetActividadesDpto(int idDpto)
         {

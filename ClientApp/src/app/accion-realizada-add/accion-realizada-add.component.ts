@@ -53,4 +53,6 @@ export class AccionRealizadaAddComponent implements OnInit {
     this.response = event;
     this.accion.evidencia = this.response.dbPath;
   };
+
+ 
 }

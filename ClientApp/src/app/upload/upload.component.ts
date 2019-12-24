@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { HttpEventType, HttpClient } from '@angular/common/http';
 
 @Component({
@@ -13,21 +13,19 @@ export class UploadComponent implements OnInit {
   public message: string;
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl:string) { }
  
   ngOnInit() {
+    
   }
- 
   public uploadFile = (files) => {
     if (files.length === 0) {
       return;
     }
- 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
- 
-    this.http.post('https://localhost:5001/api/upload', formData, {reportProgress: true, observe: 'events'})
+    this.http.post(this.baseUrl+'api/upload', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -37,6 +35,4 @@ export class UploadComponent implements OnInit {
         }
       });
   }
-
-
 }

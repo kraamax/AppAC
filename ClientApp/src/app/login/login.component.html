@@ -6,7 +6,7 @@
             <div class="card">
               <div class="card-body text-center">
                 <form #formLogin="ngForm" (ngSubmit)="validarLogin()">
-                  <h1 class="h3 mb-3 font-weight-normal" *ngIf="!isError">Login</h1>
+                  <h1 class="h3 mb-3 font-weight-normal" *ngIf="!isError">Iniciar Sesión</h1>
                   <div class="alert alert-danger" role="alert" *ngIf="isError">
                     Something is wrong!
                   </div>
@@ -27,7 +27,7 @@
                 <br>
                   <div class="form-group">              
 
-                  <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+                  <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
                 </div>  
                 
                 </form>

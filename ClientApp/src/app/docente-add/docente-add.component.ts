@@ -70,6 +70,7 @@ export class DocenteAddComponent implements OnInit {
           usuario:"",
           departamento:null
         };
+        this.docente=new Docente();
       });
     }
   }

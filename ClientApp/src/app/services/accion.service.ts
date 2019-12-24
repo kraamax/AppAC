@@ -21,7 +21,7 @@ export class AccionService {
     }
     acciones.push(accion);
     sessionStorage.setItem("acciones", JSON.stringify(acciones));
-    alert("Accion Agregada");
+    this.log("Accion Agregada");
   }
   getAcciones(): Accion[] {
     if (sessionStorage.getItem("acciones") != null) {

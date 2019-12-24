@@ -121,7 +121,7 @@
                     <td>{{ c.nombreActividad }}</td>
                     <td>{{ c.horasAsignadas }}</td>
                     <td>{{c.estado}}</td>
-                    <td><button (click)="Eliminar(c.idActividad)" class="btn" style="color: white;" >Eliminar</button></td>
+                    <td *ngIf="c.estado==='Asignada'"><button (click)="Eliminar(c.idActividad)" class="btn" style="color: white;" >Eliminar</button></td>
                   </tr>
                 </tbody>
               </table>

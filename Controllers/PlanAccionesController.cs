@@ -30,6 +30,7 @@ namespace AppAC.Controllers
             .Include(t => t.Acciones)
             .Include(t => t.Actividad)
             .ThenInclude(t=>t.Docente)
+            .ThenInclude(t=>t.Departamento)
             .ToListAsync();
         }
          [HttpGet("docente={idDocente}")]
@@ -39,6 +40,7 @@ namespace AppAC.Controllers
             .Include(t => t.Acciones)
             .Include(t => t.Actividad)
             .ThenInclude(t => t.Docente)
+            .ThenInclude(t=>t.Departamento)
             .Where(t=>t.Actividad.Docente.IdDocente==idDocente)
             .ToListAsync();
         }
@@ -52,6 +54,7 @@ namespace AppAC.Controllers
             .Include(t => t.Acciones)
             .Include(t => t.Actividad)
             .ThenInclude(t=>t.Docente)
+            .ThenInclude(t=>t.Departamento)
             .FirstOrDefaultAsync(i => i.IdPlanAcciones == id);
             if (planAcciones == null)
             {
@@ -67,6 +70,7 @@ namespace AppAC.Controllers
             .Include(t => t.Acciones)
             .Include(t => t.Actividad)
             .ThenInclude(t=>t.Docente)
+            .ThenInclude(t=>t.Departamento)
             .FirstOrDefaultAsync(i => i.ActividadId == idActividad);
             if (planAcciones == null)
             {

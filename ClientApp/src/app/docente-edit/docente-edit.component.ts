@@ -46,4 +46,11 @@ export class DocenteEditComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  restablecerPassword(){
+    var confirmacion=confirm("¿Está seguro que desea restrablecer la contraseña?");
+    if(confirmacion){
+      this.docente.password=this.docente.idDocente.toString();
+      this.update();
+    }
+  }
 }

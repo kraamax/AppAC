@@ -22,6 +22,11 @@ public class DepartamentoController : ControllerBase
 
             if (_context.Departamentos.Count() == 0)
             {
+                    Departamento departamento= new Departamento();
+                    departamento.NombreDepartamento = "Ingenieria de Sistemas";
+      
+                _context.Departamentos.Add(departamento);
+                _context.SaveChanges();
             
             
             }

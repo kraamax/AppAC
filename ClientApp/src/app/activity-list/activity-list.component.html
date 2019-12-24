@@ -1,5 +1,46 @@
 
-   
+<div class="container">
+  <h2>Actividades Complementarias</h2>
+<div class="row">
+  <div class="col-lg-2">
+      <label>Filtro: </label>
+  </div>
+  <div class="col-lg-2">
+      <label for="departamentos">Filtrar por:</label> 
+  </div>
+
+</div>
+<div class="row">
+<div class="col-lg-2">
+    <input
+        
+        class="form-control"
+        placeholder="Filtro"
+        type="text"
+        id="filtro"
+      
+      />
+</div>
+<div class="col-lg-2">
+    <select class="form-control" id="opFiltro" name="departamentos" > 
+        <option selected="selected">
+            Seleccione...
+            </option>
+        <option value="identificacion">Identificacion del docente</option>
+        <option value="actividad">Tipo de actividad</option>
+    </select>
+</div>
+<div class="col-lg-2">
+    <div class="form-group">
+    <button (click)="myFunction()" class="btn btn-primary" style="background-color: green;">Filtrar</button>
+    </div>
+  </div>
+  <div class="col-lg-4  ">
+    <div class="form-group">
+    <button routerLink="/ActivityAdd" class="btn btn-primary" style="background-color: green;">Asignar nueva actividad</button>
+    </div>
+  </div>
+</div>
 <div class="scrollable">
 <table class="table  " id="myTable"  >
    <thead> 
@@ -10,6 +51,7 @@
         <th>Apellidos</th>
         <th>Tipo de actividad</th>
         <th>Horas Asignadas</th>
+        <th>Estado</th>
         <th>Ver</th>
       </tr>
  
@@ -23,8 +65,11 @@
       <td>{{ c.docente.apellidos }}</td>
       <td>{{ c.nombreActividad }}</td>
       <td>{{ c.horasAsignadas }}</td>
-      <td>Asignada</td>
-      <td>ver</td>
+      
+      <td>{{ c.estado }}</td>
+      <td *ngIf="!(c.estado=='Asignada')"><a  routerLink="/fullPlanSee/{{c.idActividad}}">Ver</a></td>
+<td></td>
+
     </tr>
   </tbody>
 
@@ -32,4 +77,4 @@
 
 </div>
 
-
+</div>

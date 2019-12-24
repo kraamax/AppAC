@@ -30,7 +30,7 @@ docente:Docente;
 
   ngOnInit() {
 
-    this.plan={acciones:[],actividad:null,fecha:null,idPlanAcciones:0}
+    this.plan={acciones:[],actividad:new Actividad(),fecha:null,idPlanAcciones:0}
     this.getPlan();
   }
   getPlan(): void {

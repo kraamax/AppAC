@@ -13,6 +13,7 @@ public class SoftwareContext : DbContext
         public DbSet<JefeDepartamento> JefeDepartamentos { get; set; }
         public DbSet<Accion> Acciones { get; set; }
         public DbSet<PlanAcciones> Planes { get; set; }
+        public DbSet<Apertura> Aperturas { get; set; }
         
 
 }

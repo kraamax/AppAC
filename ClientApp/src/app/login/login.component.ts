@@ -9,6 +9,8 @@ import { JefeDepartamentoService } from "../services/jefe-departamento.service";
 import { AdminService } from "../services/admin.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { PasswordChangeModalComponent } from "../password-change-modal/password-change-modal.component";
+import { AperturaService } from "../services/apertura.service";
+import { MensajeModalComponent } from "../mensaje-modal/mensaje-modal.component";
 
 @Component({
   selector: "app-login",
@@ -18,16 +20,21 @@ import { PasswordChangeModalComponent } from "../password-change-modal/password-
 export class LoginComponent implements OnInit {
   docente: Docente;
   jefeDpto: JefeDepartamento;
+  fecha:string;
 
   constructor(
     private docenteService: DocenteService,
     private router: Router,
     private jefeDptoService: JefeDepartamentoService,
     private adminService:AdminService,
-    private modalService:NgbModal
+    private modalService:NgbModal,
+    private aperturaService:AperturaService
+
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fecha=new Date().getFullYear() + "-" +(new Date().getMonth() +1) + "-" +new Date().getDate()  ;
+  }
 
   validarLogin() {
     var tipoCargo = (document.getElementById("tipoCargo") as HTMLInputElement)
@@ -54,6 +61,23 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  validarPlazoActivacionDocente(){
+    var currentFecha=new Date(this.fecha);
+    this.aperturaService.getCurrentApertura().subscribe(rest=>{
+      if(isUndefined(rest)){
+        console.log(rest);
+this.log('No se han establecidos fechas para la habilitación de la plataforma');
+      }else{
+        if(currentFecha.getTime()>=new Date(rest.fechaInicio).getTime()  && currentFecha.getTime()<new Date(rest.fechaFin).getTime()){
+           this.ValidarLoginDocente();
+        }else{
+          this.log("solo puede ingresar a la plataforma entre el "+rest.fechaInicio +" y el "+rest.fechaFin);
+        }
+      }
+    })
+
+    
+  }
   validarLoginJefeDpto() {
     var user = (document.getElementById("user") as HTMLInputElement).value;
     this.jefeDptoService.getJefeDptoByUser(user).subscribe(jefe => {
@@ -74,7 +98,7 @@ export class LoginComponent implements OnInit {
         this.modalService.open(PasswordChangeModalComponent,{backdrop: 'static', keyboard: false});
       }
     } else {
-      alert("Contraseña incorrecta");
+      this.log("Contraseña incorrecta");
     }
   }
   validarDocente(usuario: string, password: string) {
@@ -88,7 +112,7 @@ export class LoginComponent implements OnInit {
         this.modalService.open(PasswordChangeModalComponent,{backdrop: 'static', keyboard: false});
       }
     } else {
-      alert("Contraseña incorrecta");
+      this.log("Contraseña incorrecta");
     }
   }
   validarLoginAdmin(){
@@ -98,7 +122,12 @@ export class LoginComponent implements OnInit {
       this.adminService.setAdminLoggedIn();
       this.router.navigate(["home"]);
     }else{
-      alert("Usuario y/o Contraseña incorrectos");
+      this.log("Usuario y/o Contraseña incorrectos");
     }
   }
+  private log(message: string) {
+    var mesage =this.modalService.open(MensajeModalComponent);
+    mesage.componentInstance.titulo="Atencion:";
+    mesage.componentInstance.body=` ${message}`;
+}
 }

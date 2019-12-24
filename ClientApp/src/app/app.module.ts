@@ -35,6 +35,11 @@ import { AccionesToPlanListComponent } from './acciones-to-plan-list/acciones-to
 import { AccionesPListComponent } from './acciones-plist/acciones-plist.component';
 import { UploadComponent } from './upload/upload.component';
 import { PasswordChangeModalComponent } from './password-change-modal/password-change-modal.component';
+import { FullPlanSeeComponent } from './full-plan-see/full-plan-see.component';
+import { AccionPlaneadaAddComponent } from './accion-planeada-add/accion-planeada-add.component';
+import { PlazoActivacionComponent } from './plazo-activacion/plazo-activacion.component';
+import { AperturaGuard } from './services/apertura.guard';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -61,7 +66,10 @@ import { PasswordChangeModalComponent } from './password-change-modal/password-c
     AccionesToPlanListComponent,
     AccionesPListComponent,
     UploadComponent,
-    PasswordChangeModalComponent
+    PasswordChangeModalComponent,
+    FullPlanSeeComponent,
+    AccionPlaneadaAddComponent,
+    PlazoActivacionComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   ,
@@ -85,11 +93,15 @@ import { PasswordChangeModalComponent } from './password-change-modal/password-c
       { path: 'planAdd',canActivate:[AuthGuard], component: PlanAccionesAddComponent },
       { path: 'actForPlanList',canActivate:[AuthGuard], component: AccionesToPlanListComponent },
       { path: 'planSee/:idActividad',canActivate:[AuthGuard], component: PlanSeeComponent },
-      { path: 'planList',canActivate:[AuthGuard], component: PlanAccionesListComponent },
+      { path: 'planList',canActivate:[AuthGuard,AperturaGuard], component: PlanAccionesListComponent },
       { path: 'accionesList/:idPlan',canActivate:[AuthGuard], component: AccionesPListComponent },
+      { path: 'fullPlanSee/:idActividad',canActivate:[AuthJefeDptoGuard], component: FullPlanSeeComponent },
+      { path: 'ActividadList',canActivate:[AuthJefeDptoGuard], component: ActivityListComponent },
+      { path: 'plazoActivacion',canActivate:[AdminGuard], component: PlazoActivacionComponent },
+
     ])
   ],
-    providers: [DocenteService,JefeDepartamentoService],
+    providers: [DocenteService,JefeDepartamentoService,DatePipe],
     entryComponents: [MensajeModalComponent,AccionRealizadaAddComponent,PasswordChangeModalComponent],
   bootstrap: [AppComponent]
 })

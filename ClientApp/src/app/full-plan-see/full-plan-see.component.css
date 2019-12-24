@@ -1,0 +1,40 @@
+
+td.normal, th.normal{
+   
+    width: 100px;
+    word-wrap: break-word;
+}
+
+table{
+    table-layout: fixed;
+}
+td.masAncho{
+ 
+    width: 300px;
+    word-wrap: break-word;
+}
+button {
+    background-color: green;
+  }
+  button:hover {
+    background-color: seagreen;
+  }
+
+  p {
+    font-size: large;
+  }
+th.masAncho{
+
+    width: 300px;
+    word-wrap: break-word;
+}
+.scrollable {
+    height: 450px;
+    overflow-y: scroll;
+  }
+  .my-custom-scrollbar {
+    position: relative;
+    height: 450px;
+    overflow: auto;
+  }
+

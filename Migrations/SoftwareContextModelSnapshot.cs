@@ -74,6 +74,27 @@ namespace AppAC.Migrations
                     b.ToTable("Actividades");
                 });
 
+            modelBuilder.Entity("AppAC.Models.Apertura", b =>
+                {
+                    b.Property<int>("IdApertura")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FechaFin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FechaInicio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdApertura");
+
+                    b.ToTable("Aperturas");
+                });
+
             modelBuilder.Entity("AppAC.Models.Departamento", b =>
                 {
                     b.Property<int>("IdDepartamento")

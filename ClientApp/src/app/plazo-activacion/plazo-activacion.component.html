@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>Plazo de habilitación</h2>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="fechaInicio">Fecha de inicio</label>
+        <input
+          type="date"
+          name="initialDate"
+          class="form-control"
+          id="initialDate"
+          [(ngModel)]="fechaInicio"
+        />
+      </div>
+      <div class="form-group">
+        <label for="fechaFin">Fecha de Fin</label>
+        <input
+          type="date"
+          name="finalDate"
+          class="form-control"
+          id="finalDate"
+          [(ngModel)]="fechaFin"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-lg-2">
+            <div class="form">
+                    <button class="btn btn-primary" (click)="updateApertura()">
+                      Actualizar
+                    </button>
+                  </div>
+
+      </div>
+  <div class="col-lg-1">
+        <div class="form">
+                <button class="btn btn-primary" (click)="deleteApertura()">Eliminar</button>
+              </div>
+
+  </div>
+   
+  </div>
+</div>

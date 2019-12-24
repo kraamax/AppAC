@@ -61,7 +61,7 @@
         </tr>
       </table>
     </div>
-    <div class="form-group" >
+    <div class="form-group" *ngIf="!(plan.actividad.estado==='Terminada') && !(plan.actividad.estado==='No Terminada')">
         <button class="btn btn-primary" (click)="deletePlan()">Eliminar</button>
     </div>
 

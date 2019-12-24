@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Consulta Plan de Acciones</h2>
+    <h2>Consulta Plan de Acción</h2>
     <table class="table">
         <tr>
             <th>Actividad</th>
@@ -15,7 +15,7 @@
             <td>{{ac.fechaAsignacion}}</td>
             <td>{{ac.estado}}</td>
             <td *ngIf="ac.estado==='Asignada'"><a routerLink="/planAdd">Registrar Plan</a></td>
-            <td *ngIf="ac.estado==='Planeada'"><a routerLink="/planSee/{{ac.idActividad}}">Ver</a></td>
+            <td *ngIf="!(ac.estado==='Asignada')"><a routerLink="/planSee/{{ac.idActividad}}">Ver</a></td>
         </tr>
     </table>
 </div>

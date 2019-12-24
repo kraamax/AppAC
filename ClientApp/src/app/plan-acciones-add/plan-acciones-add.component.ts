@@ -9,6 +9,8 @@ import { PlanAccionesService } from "../services/plan-acciones.service";
 import { Accion } from "../models/accion";
 import { PlanAcciones } from "../models/plan-acciones";
 import { Location } from "@angular/common";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { MensajeModalComponent } from "../mensaje-modal/mensaje-modal.component";
 
 @Component({
   selector: "app-plan-acciones-add",
@@ -28,6 +30,7 @@ export class PlanAccionesAddComponent implements OnInit {
     private docenteService: DocenteService,
     private accionService: AccionService,
     private planService: PlanAccionesService,
+    private modalService:NgbModal,
     private location: Location
   ) {}
 
@@ -46,7 +49,7 @@ export class PlanAccionesAddComponent implements OnInit {
         this.actividades = actividades;
         console.log(this.actividades);
         if (this.actividades.length <= 0) {
-          alert("El docente no tiene actividades asignadas");
+          this.log("El docente no tiene actividades asignadas");
         }
       });
   }
@@ -92,14 +95,14 @@ export class PlanAccionesAddComponent implements OnInit {
             this.accion.accionPlaneada = "";
             this.acciones = this.accionService.getAcciones();
           } else {
-            alert("Digite una descripcion");
+            this.log("Digite una descripcion");
           }
         } else {
-          alert("Ya existe un plan de acciones para esta actividad");
+          this.log("Ya existe un plan de acciones para esta actividad");
         }
       });
     } else {
-      alert("Seleccione una actividad");
+      this.log("Seleccione una actividad");
     }
   }
 
@@ -116,17 +119,17 @@ export class PlanAccionesAddComponent implements OnInit {
         if (isUndefined(this.plan)) {
           this.addPlan();
         } else {
-          alert("Ya existe un plan de acciones para esta actividad");
+          this.log("Ya existe un plan de acciones para esta actividad");
         }
       });
     } else {
-      alert("Seleccione una actividad");
+      this.log("Seleccione una actividad");
     }
   }
   addPlan() {
     this.getAcciones();
     if (this.acciones.length <= 0) {
-      alert("Debe agregar las acciones a realizar");
+      this.log("Debe agregar las acciones a realizar");
     } else {
       this.plan = new PlanAcciones();
       this.plan.idPlanAcciones = 0;
@@ -146,6 +149,7 @@ export class PlanAccionesAddComponent implements OnInit {
         this.actividadService.update(this.actividad).subscribe();
         this.accionService.eliminarAcciones();
         this.getAcciones();
+        this.goBack();
       });
     }
   }
@@ -159,4 +163,9 @@ export class PlanAccionesAddComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  private log(message: string) {
+    var mesage =this.modalService.open(MensajeModalComponent);
+    mesage.componentInstance.titulo="Atencion:";
+    mesage.componentInstance.body=` ${message}`;
+}
 }

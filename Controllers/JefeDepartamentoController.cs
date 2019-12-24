@@ -19,7 +19,7 @@ public class JefeDepartamentoController : ControllerBase
         {
             _context = context;
             
-            departamento.NombreDepartamento = "Programacion 1";
+            departamento.NombreDepartamento = "Ingenieria de Sistemas";
 
             if (_context.JefeDepartamentos.Count() == 0)
             {

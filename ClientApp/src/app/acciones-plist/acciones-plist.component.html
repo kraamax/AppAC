@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Plan de Acciones</h2>
+  <h2>Plan de Acción</h2>
   <br />
   <div class="row">
     <div class="col-lg-2">
@@ -50,6 +50,18 @@
         />
       </div>
     </div>
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label>Progreso: </label>
+        <input
+          type="text"
+          [(ngModel)]="progreso"
+          class="form-control"
+          placeholder="Porcentaje"
+          readonly
+        />
+      </div>
+    </div>
   </div>
   <div class="table-wrapper-scroll-y my-custom-scrollbar">
     <table class="table table-bordered table-striped mb-0">
@@ -65,7 +77,7 @@
         <td
           style="vertical-align: middle;"
           class="masAncho"
-          *ngIf="action.accionRealizada === ''"
+          *ngIf="(action.accionRealizada === '')&&!(plan.actividad.estado==='Terminada') && !(plan.actividad.estado==='No Terminada')"
         >
           <button
             class="btn btn-primary"
@@ -77,11 +89,11 @@
         <td class="masAncho" *ngIf="!(action.accionRealizada === '')">
           {{ action.accionRealizada }}
         </td>
-        <td *ngIf="!(action.evidencia === '')"><button class="btn btn-primary"  (click)="createImgPath(action.evidencia)">ver</button></td>
+        <td *ngIf="!(action.evidencia === '')" style="vertical-align: middle;"><button class="btn btn-primary"  (click)="createImgPath(action.evidencia)">ver</button></td>
 
         <td
           style="vertical-align: middle;"
-          *ngIf="!(action.accionRealizada === '')"
+          *ngIf="!(action.accionRealizada === '') && !(plan.actividad.estado==='Terminada') && !(plan.actividad.estado==='No Terminada') "
         >
           <button
             class="btn btn-primary"
@@ -92,4 +104,10 @@
         </td>
       </tr>
     </table>
+    <br>
   </div>
+    <div class="form-group" style="text-align: right;" *ngIf="!(plan.actividad.estado==='Terminada') && !(plan.actividad.estado==='No Terminada') ">
+      <button class="btn btn-primary" (click)="finalizar()">Finalizar</button>
+    </div>
+    
+

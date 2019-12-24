@@ -10,7 +10,7 @@ table{
 }
 td.masAncho{
  
-    width: 450px;
+    width: 445px;
     word-wrap: break-word;
 }
 button {
@@ -21,7 +21,7 @@ button {
   }
 th.masAncho{
 
-    width: 450px;
+    width: 445px;
     word-wrap: break-word;
 }
 .scrollable {

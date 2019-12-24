@@ -28,7 +28,8 @@ public class DocenteController : ControllerBase
                 docente.IdDocente=1;
                 docente.Nombres= "juan carlos";
                 docente.Apellidos="Molina escobar";
-                docente.Departamento=departamento;
+                //docente.Departamento=departamento;
+                docente.DepartamentoId=1;
                 docente.Sexo="Masculino";
                 docente.Telefono="33333333";
                 docente.Password=""+docente.IdDocente;

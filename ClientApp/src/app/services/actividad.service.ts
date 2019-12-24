@@ -47,6 +47,13 @@ getActividadesDocente(idDocente:number): Observable<Actividad[]> {
     catchError(this.handleError<Actividad[]>('getAll', []))
   );
 }
+getActividadesByDpto(idDpto:number): Observable<Actividad[]> {
+  const url = `${this.baseUrl + 'api/actividad'}/departamento=${idDpto}`;
+  return this.http.get<Actividad[]>(url).pipe(
+    tap(_ => console.log('Se Consulta la información')),
+    catchError(this.handleError<Actividad[]>('getAll', []))
+  );
+}
 update (actividad: Actividad): Observable<any> {
   const url = `${this.baseUrl + 'api/actividad'}/${actividad.idActividad}`;
   return this.http.put(url, actividad, httpOptions).pipe(
